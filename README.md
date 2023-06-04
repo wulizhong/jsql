@@ -1,5 +1,4 @@
 ## 使用安装
-
 git clone 当前项目，然后进入jsql目录下的jsql项目执行mvn install 安装
 进入jsql-spring-boot-starter 执行mvn install安装
 进入用idea或eclipse打开jsql-generator项目，找到GeneratorCode 修改生成配置，生成代码
