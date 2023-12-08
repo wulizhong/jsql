@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.wlz.jsql.JSqlException;
+import com.wlz.jsql.SqlContext;
 import com.wlz.jsql.sql.database.Column;
 import com.wlz.jsql.util.StringUtils;
 
@@ -20,7 +21,7 @@ public class Set extends SqlFragment{
 	}
 
 	@Override
-	public String toSql() {
+	public String toSql(SqlContext sqlContext) {
 		// TODO Auto-generated method stub
 		
 		if(columns == null||values == null) {
@@ -39,7 +40,7 @@ public class Set extends SqlFragment{
 		}
 		
 		sb.append(StringUtils.join(sqlFragments, ","));
-		sb.insert(0, pre().toSql());
+		sb.insert(0, pre().toSql(sqlContext));
 		
 		return sb.toString();
 	}

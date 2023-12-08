@@ -1,16 +1,18 @@
 package com.wlz.jsql.sql;
 
+import com.wlz.jsql.SqlContext;
+
 public class Having extends ConditionSqlFragment{
 
 
 	
 	@Override
-	public String toSql() {
+	public String toSql(SqlContext sqlContext) {
 		// TODO Auto-generated method stub
 		StringBuffer sb = new StringBuffer(" having ");
-		sb.append(sqlFragment.toSql());
+		sb.append(sqlFragment.toSql(sqlContext));
 		sb.append(" ");
-		sb.insert(0,pre().toSql());
+		sb.insert(0,pre().toSql(sqlContext));
 		return sb.toString();
 	}
 

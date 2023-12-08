@@ -26,8 +26,6 @@ public class JdbcTemplateSqlExecutor extends SqlExecutor {
 
 	private JdbcTemplate jdbcTemplate;
 
-//	private boolean isDebug = true;
-	
 	private JSqlProperty jsqlProperty;
 
 	public JdbcTemplateSqlExecutor(JdbcTemplate jdbcTemplate,JSqlProperty jsqlProperty) {
@@ -38,7 +36,7 @@ public class JdbcTemplateSqlExecutor extends SqlExecutor {
 	@Override
 	public int selectInt(Sql sql) {
 		// TODO Auto-generated method stub
-		String sqlStr = sql.toSql();
+		String sqlStr = sql.toSql(getSqlContext());
 		List<Object> paramters = sql.paramters();
 		if (jsqlProperty.isSqlPrint()||jsqlProperty.isRawSqlPrint()||jsqlProperty.isParamPrint()) {
 			StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
@@ -69,7 +67,7 @@ public class JdbcTemplateSqlExecutor extends SqlExecutor {
 	}
 
 	public Record selectList(Sql sql) {
-		String sqlStr = sql.toSql();
+		String sqlStr = sql.toSql(getSqlContext());
 		List<Table> tables = sql.tables();
 		List<Object> paramters = sql.paramters();
 		if (jsqlProperty.isSqlPrint()||jsqlProperty.isRawSqlPrint()||jsqlProperty.isParamPrint()) {
@@ -94,16 +92,13 @@ public class JdbcTemplateSqlExecutor extends SqlExecutor {
 			StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
 			logResult(stackTrace, record.getDbResultMap());
 		}
-
 		return record;
 	}
 	
 	@Override
 	public Record selectPage(Sql sql, int pageNumber, int pageSize) {
 		// TODO Auto-generated method stub
-		String pageSql = sql.toSql();
-
-		
+		String pageSql = sql.toSql(getSqlContext());
 
 		List<Object> paramters = sql.paramters();
 
@@ -178,7 +173,7 @@ public class JdbcTemplateSqlExecutor extends SqlExecutor {
 	@Override
 	public InsertResult insert(Sql sql) {
 		// TODO Auto-generated method stub
-		String sqlStr = sql.toSql();
+		String sqlStr = sql.toSql(getSqlContext());
 		List<Table> tables = sql.tables();
 		List<Object> paramters = sql.paramters();
 		if (jsqlProperty.isSqlPrint()||jsqlProperty.isRawSqlPrint()||jsqlProperty.isParamPrint()) {
@@ -235,7 +230,7 @@ public class JdbcTemplateSqlExecutor extends SqlExecutor {
 	@Override
 	public int update(Sql sql) {
 		// TODO Auto-generated method stub
-		String sqlStr = sql.toSql();
+		String sqlStr = sql.toSql(getSqlContext());
 		List<Object> paramters = sql.paramters();
 		if (jsqlProperty.isSqlPrint()||jsqlProperty.isRawSqlPrint()||jsqlProperty.isParamPrint()) {
 			StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
@@ -320,5 +315,4 @@ public class JdbcTemplateSqlExecutor extends SqlExecutor {
 		}
 		return stackTrace[index + 1];
 	}
-
 }

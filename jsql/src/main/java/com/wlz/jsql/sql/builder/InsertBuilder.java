@@ -3,6 +3,7 @@ package com.wlz.jsql.sql.builder;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.wlz.jsql.SqlContext;
 import com.wlz.jsql.sql.Select;
 import com.wlz.jsql.sql.Values;
 import com.wlz.jsql.sql.database.Column;
@@ -39,7 +40,7 @@ public class InsertBuilder extends SqlFragmentBuilder{
 		return val;
 	}
 	@Override
-	public String toSql() {
+	public String toSql(SqlContext sqlContext) {
 		// TODO Auto-generated method stub
 		
 		StringBuffer sb = new StringBuffer();

@@ -2,6 +2,6 @@ package com.wlz.jsql;
 
 public enum SqlDialect {	
 
-	MYSQL,ORACLE
+	MYSQL,ORACLE,H2DB
 	
 }

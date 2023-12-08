@@ -1,5 +1,7 @@
 package com.wlz.jsql.sql;
 
+import com.wlz.jsql.SqlContext;
+
 public class Limit extends SqlFragment{
 
 	private int offset = -1;
@@ -18,7 +20,7 @@ public class Limit extends SqlFragment{
 	}
 
 	@Override
-	public String toSql() {
+	public String toSql(SqlContext sqlContext) {
 		// TODO Auto-generated method stub
 		StringBuffer sb = new StringBuffer(" limit ");
 		sb.append(offset);
@@ -27,7 +29,7 @@ public class Limit extends SqlFragment{
 			sb.append(rows);
 			sb.append(" ");
 		}
-		sb.insert(0, pre().toSql());
+		sb.insert(0, pre().toSql(sqlContext));
 		return sb.toString();
 	}
 	

@@ -3,6 +3,7 @@ package com.wlz.jsql.sql.database;
 import java.lang.reflect.Array;
 import java.util.*;
 
+import com.wlz.jsql.SqlContext;
 import com.wlz.jsql.sql.SqlFragment;
 import com.wlz.jsql.sql.builder.ConditionBuilder;
 import com.wlz.jsql.util.CollectionUtils;
@@ -206,7 +207,7 @@ public class Column extends SqlFragment {
     }
 
     @Override
-    public String toSql() {
+    public String toSql(SqlContext sqlContext) {
         // TODO Auto-generated method stub
         StringBuffer sb = new StringBuffer(" ");
         sb.append(this.tableAlias);
@@ -252,7 +253,7 @@ public class Column extends SqlFragment {
         }
         if (value != null && value instanceof SqlFragment) {
             SqlFragment fragment = (SqlFragment) value;
-            sb.append(fragment.toSql());
+            sb.append(fragment.toSql(sqlContext));
         } else if ((operator == LIKE || operator == IN || operator == NOT_IN) && value != null) {
 
             if (operator == LIKE) {
@@ -301,7 +302,7 @@ public class Column extends SqlFragment {
 
         SqlFragment preSqlFragment = pre();
         if (preSqlFragment != null) {
-            sb.insert(0, pre().toSql());
+            sb.insert(0, pre().toSql(sqlContext));
         }
         return sb.toString();
     }

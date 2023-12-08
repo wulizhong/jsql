@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.wlz.jsql.SqlContext;
 import com.wlz.jsql.util.CollectionUtils;
 import com.wlz.jsql.util.StringUtils;
 
@@ -38,7 +39,7 @@ public class Values extends SqlFragment{
 	}
 
 	@Override
-	public String toSql() {
+	public String toSql(SqlContext sqlContext) {
 		// TODO Auto-generated method stub
 		StringBuffer sb = new StringBuffer();
 		if(values!=null) {
@@ -51,7 +52,7 @@ public class Values extends SqlFragment{
 			sb.append(StringUtils.join(strList, ","));
 			sb.append(")");
 		}
-		sb.insert(0,pre().toSql());
+		sb.insert(0,pre().toSql(sqlContext));
 		return sb.toString();
 	}
 

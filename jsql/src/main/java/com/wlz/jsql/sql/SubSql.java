@@ -3,6 +3,7 @@ package com.wlz.jsql.sql;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.wlz.jsql.SqlContext;
 import com.wlz.jsql.sql.builder.ConditionBuilder;
 import com.wlz.jsql.sql.database.Column;
 import com.wlz.jsql.util.CollectionUtils;
@@ -27,13 +28,13 @@ public class SubSql extends SqlFragment{
 	}
 
 	@Override
-	public String toSql() {
+	public String toSql(SqlContext sqlContext) {
 		// TODO Auto-generated method stub
 		
 		StringBuffer sql =  new StringBuffer();
 		
 		sql.append(" ( ");
-		sql.append(sqlFragment.toSql());
+		sql.append(sqlFragment.toSql(sqlContext));
 		sql.append(" ) ");
 		return sql.toString();
 	}

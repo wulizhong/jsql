@@ -1,5 +1,7 @@
 package com.wlz.jsql.sql;
 
+import com.wlz.jsql.SqlContext;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,7 +23,7 @@ public class Select extends SqlFragment{
 	}
 
 	@Override
-	public String toSql() {
+	public String toSql(SqlContext sqlContext) {
 		// TODO Auto-generated method stub
 		
 		StringBuffer sb = new StringBuffer("select ");
@@ -31,7 +33,7 @@ public class Select extends SqlFragment{
 		}else {
 			for(int i = 0;i<sqlFragments.length;i++) {
 				
-				sb.append(sqlFragments[i].toSql());
+				sb.append(sqlFragments[i].toSql(sqlContext));
 				sb.append(" ");
 				if(i!=sqlFragments.length-1) {
 					sb.append(",");

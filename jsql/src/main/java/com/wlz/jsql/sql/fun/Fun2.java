@@ -1,5 +1,6 @@
 package com.wlz.jsql.sql.fun;
 
+import com.wlz.jsql.SqlContext;
 import com.wlz.jsql.sql.database.Column;
 
 public class Fun2 extends Fun{
@@ -35,7 +36,7 @@ public class Fun2 extends Fun{
     }
 
     @Override
-    public String toSql() {
+    public String toSql(SqlContext sqlContext) {
         StringBuffer sb = new StringBuffer(" "+functionName+" ");
 
         sb.append("(");

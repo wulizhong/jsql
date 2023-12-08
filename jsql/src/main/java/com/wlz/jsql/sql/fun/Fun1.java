@@ -1,5 +1,6 @@
 package com.wlz.jsql.sql.fun;
 
+import com.wlz.jsql.SqlContext;
 import com.wlz.jsql.sql.database.Column;
 
 public class Fun1 extends Fun{
@@ -21,7 +22,7 @@ public class Fun1 extends Fun{
 
 
 	@Override
-	public String toSql() {
+	public String toSql(SqlContext sqlContext) {
 		// TODO Auto-generated method stub
 //		Object [] params = new Object[]{eqColumn,eqStr,gtColumn,gtStr,gteColumn,gteStr,ltColumn,ltStr,lteColumn,lteStr};
 //		for(Object obj : params){
@@ -55,7 +56,7 @@ public class Fun1 extends Fun{
 		}else if(field == null) {
 			return " "+functionName+"( "+cloumnName+" ) as "+cloumnName;
 		}
-		return " "+functionName+"( "+field.toSql()+" ) as "+field.getName();
+		return " "+functionName+"( "+field.toSql(sqlContext)+" ) as "+field.getName();
 	}
 
 }

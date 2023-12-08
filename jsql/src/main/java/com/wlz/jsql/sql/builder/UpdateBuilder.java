@@ -1,5 +1,6 @@
 package com.wlz.jsql.sql.builder;
 
+import com.wlz.jsql.SqlContext;
 import com.wlz.jsql.sql.Set;
 import com.wlz.jsql.sql.database.Column;
 import com.wlz.jsql.sql.database.Table;
@@ -25,7 +26,7 @@ public class UpdateBuilder extends SqlFragmentBuilder{
 	}
 
 	@Override
-	public String toSql() {
+	public String toSql(SqlContext sqlContext) {
 		// TODO Auto-generated method stub
 		StringBuffer sb = new StringBuffer("update ");
 		sb.append(table.getTableName());
