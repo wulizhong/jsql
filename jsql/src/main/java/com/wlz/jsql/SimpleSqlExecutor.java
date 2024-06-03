@@ -24,7 +24,7 @@ public class SimpleSqlExecutor extends SqlExecutor {
 	@Override
 	public Record selectList(Sql sql) {
 		// TODO Auto-generated method stub
-		String sqlStr = sql.toSql();
+		String sqlStr = sql.toSql(getSqlContext());
 
 		System.out.println(sqlStr);
 
@@ -54,7 +54,7 @@ public class SimpleSqlExecutor extends SqlExecutor {
 	@Override
 	public Record selectPage(Sql sql, int pageNumber, int pageSize) {
 		// TODO Auto-generated method stub
-		String sqlStr = sql.toSql();
+		String sqlStr = sql.toSql(getSqlContext());
 		System.out.println(sqlStr);
 
 		List<Object> paramters = sql.paramters();
@@ -114,7 +114,7 @@ public class SimpleSqlExecutor extends SqlExecutor {
 	@Override
 	public int selectInt(Sql sql) {
 		// TODO Auto-generated method stub
-		String sqlStr = sql.toSql();
+		String sqlStr = sql.toSql(getSqlContext());
 		System.out.println(sqlStr);
 		List<Object> paramters = sql.paramters();
 		try {
@@ -145,7 +145,7 @@ public class SimpleSqlExecutor extends SqlExecutor {
 	@Override
 	public InsertResult insert(Sql sql) {
 		// TODO Auto-generated method stub
-		String sqlStr = sql.toSql();
+		String sqlStr = sql.toSql(getSqlContext());
 		System.out.println(sqlStr);
 		List<Table> tables = sql.tables();
 		List<Object> paramters = sql.paramters();
@@ -213,7 +213,7 @@ public class SimpleSqlExecutor extends SqlExecutor {
 	@Override
 	public int update(Sql sql) {
 		// TODO Auto-generated method stub
-		String sqlStr = sql.toSql();
+		String sqlStr = sql.toSql(getSqlContext());
 		System.out.println(sqlStr);
 		List<Object> paramters = sql.paramters();
 		try {

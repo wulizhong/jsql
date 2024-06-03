@@ -8,7 +8,7 @@ public interface Sql {
 
 	public  List<Object> paramters();
 	
-	public  String toSql();
+	public  String toSql(SqlContext sqlContext);
 	
 	public List<Table> tables();
 }

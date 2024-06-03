@@ -22,6 +22,8 @@ import com.wlz.jsql.util.ReflectionUtils;
 
 public class SqlExecutor {
 
+	protected SqlContext sqlContext;
+
 	public InsertResult insert(Sql sql) {
 		return null;
 	}
@@ -195,5 +197,12 @@ public class SqlExecutor {
 			}
 		}
 	}
-	
+
+	public SqlContext getSqlContext() {
+		return sqlContext;
+	}
+
+	public void setSqlContext(SqlContext sqlContext) {
+		this.sqlContext = sqlContext;
+	}
 }

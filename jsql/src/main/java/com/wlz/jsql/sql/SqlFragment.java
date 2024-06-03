@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.wlz.jsql.Sql;
+import com.wlz.jsql.SqlContext;
 import com.wlz.jsql.sql.database.Table;
 
 public abstract class SqlFragment implements Sql{
@@ -38,7 +39,7 @@ public abstract class SqlFragment implements Sql{
 		return new ArrayList<>();
 	}
 	
-	public String toSql() {
+	public String toSql(SqlContext sqlContext) {
 		return null;
 	}
 	

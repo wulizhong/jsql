@@ -3,6 +3,7 @@ package com.wlz.jsql.sql;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.wlz.jsql.SqlContext;
 import com.wlz.jsql.sql.database.Column;
 import com.wlz.jsql.util.StringUtils;
 
@@ -16,21 +17,21 @@ public class GroupBy extends SqlFragment{
 
 
 	@Override
-	public String toSql() {
+	public String toSql(SqlContext sqlContext) {
 		// TODO Auto-generated method stub
 		if(columns == null) {
-			return pre().toSql();
+			return pre().toSql(sqlContext);
 		}
 		StringBuffer sb = new StringBuffer(" group by ");
 		
 		List<String> sqlFragmentList = new ArrayList<>();
 		
 		for(Column f : columns) {
-			sqlFragmentList.add(f.toSql());
+			sqlFragmentList.add(f.toSql(sqlContext));
 		}
 		sb.append(StringUtils.join(sqlFragmentList, ","));
 		sb.append(" ");
-		sb.insert(0, pre().toSql());
+		sb.insert(0, pre().toSql(sqlContext));
 		return sb.toString();
 	}
 	

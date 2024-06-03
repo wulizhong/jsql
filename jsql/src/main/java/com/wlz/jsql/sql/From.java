@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.wlz.jsql.JSqlException;
+import com.wlz.jsql.SqlContext;
 import com.wlz.jsql.sql.database.Table;
 
 public class From extends SqlFragment{
@@ -29,7 +30,7 @@ public class From extends SqlFragment{
 	}
 
 	@Override
-	public String toSql() {
+	public String toSql(SqlContext sqlContext) {
 		// TODO Auto-generated method stub
 		
 		if(tables == null||tables.length == 0) {
@@ -46,7 +47,7 @@ public class From extends SqlFragment{
 				sb.append(", ");
 			}
 		}
-		sb.insert(0, pre().toSql());
+		sb.insert(0, pre().toSql(sqlContext));
 		return sb.toString();
 	}
 

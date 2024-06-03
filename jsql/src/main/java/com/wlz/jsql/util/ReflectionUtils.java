@@ -39,7 +39,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @param clzz
+	 * @param clazz
 	 * @return
 	 */
 	public static List<Field> findAllFields(Class<?> clazz) {
@@ -55,7 +55,7 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * @param clzz
+	 * @param clazz
 	 * @return
 	 */
 	public static Field findField(Class<?> clazz,String fieldName) {

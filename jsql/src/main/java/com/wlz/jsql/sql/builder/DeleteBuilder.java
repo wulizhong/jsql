@@ -3,6 +3,7 @@ package com.wlz.jsql.sql.builder;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.wlz.jsql.SqlContext;
 import com.wlz.jsql.sql.database.Table;
 
 public class DeleteBuilder extends SqlFragmentBuilder{
@@ -27,7 +28,7 @@ public class DeleteBuilder extends SqlFragmentBuilder{
 	}
 
 	@Override
-	public String toSql() {
+	public String toSql(SqlContext sqlContext) {
 		// TODO Auto-generated method stub
 
 		StringBuffer sb = new StringBuffer("delete from ");

@@ -2,6 +2,7 @@ package com.wlz.jsql.sql.builder;
 
 import java.util.List;
 
+import com.wlz.jsql.SqlContext;
 import com.wlz.jsql.sql.SqlFragment;
 import com.wlz.jsql.sql.database.Table;
 
@@ -16,9 +17,9 @@ public class SqlFragmentBuilder extends SqlFragment{
 	}
 
 	@Override
-	public String toSql() {
+	public String toSql(SqlContext sqlContext) {
 		// TODO Auto-generated method stub
-		return currentSqlFragment == null? pre().toSql():currentSqlFragment.toSql();
+		return currentSqlFragment == null? pre().toSql(sqlContext):currentSqlFragment.toSql(sqlContext);
 	}
 	
 	public List<Table> tables(){

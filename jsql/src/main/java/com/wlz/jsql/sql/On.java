@@ -3,6 +3,7 @@ package com.wlz.jsql.sql;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.wlz.jsql.SqlContext;
 import com.wlz.jsql.sql.database.Column;
 import com.wlz.jsql.sql.database.Table;
 import com.wlz.jsql.util.CollectionUtils;
@@ -22,7 +23,7 @@ public class On extends SqlFragment{
 	}
 
 	@Override
-	public String toSql() {
+	public String toSql(SqlContext sqlContext) {
 		// TODO Auto-generated method stub
 		StringBuffer sb = new StringBuffer(" ");
 		sb.append(joinOnType);
@@ -36,11 +37,11 @@ public class On extends SqlFragment{
 		}
 		if(column!=null) {
 			sb.append(" on ");
-			sb.append(column.toSql());
+			sb.append(column.toSql(sqlContext));
 		}
 		
 		sb.append(" ");
-		sb.insert(0,pre().toSql());
+		sb.insert(0,pre().toSql(sqlContext));
 		return sb.toString();
 	}
 
