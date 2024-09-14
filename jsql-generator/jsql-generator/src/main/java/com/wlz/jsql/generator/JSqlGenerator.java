@@ -1,6 +1,8 @@
 package com.wlz.jsql.generator;
 
+import com.wlz.jsql.generator.config.BaseServiceConfig;
 import com.wlz.jsql.generator.config.GeneratorConfig;
+import com.wlz.jsql.generator.config.ServiceConfig;
 import com.wlz.jsql.generator.generator.*;
 import org.apache.commons.io.IOUtils;
 
@@ -83,6 +85,24 @@ public class JSqlGenerator {
                             generator.setPrefix(generatorConfig.getTableConfig().getPrefix());
                             String code = generator.generateCode();
                             write(basePath,generatorConfig.getDaoConfig().getPackageName(),code,generator.getFileName());
+                        }
+
+                        if(generatorConfig.getBaseServiceConfig()!=null){
+                            BaseServiceConfig config = generatorConfig.getBaseServiceConfig();
+                            Table table = mySqlTableDriver.getTable(connection, tableName);
+                            BaseServiceGenerator generator = new BaseServiceGenerator(config.getPackageName(),generatorConfig.getBaseDaoConfig().getPackageName(),generatorConfig.getEntityConfig().getPackageName(),table);
+                            String code = generator.generateCode();
+                            write(basePath,config.getPackageName(),code,generator.getFileName());
+                        }
+
+                        if(generatorConfig.getServiceConfig()!=null){
+                            ServiceConfig config = generatorConfig.getServiceConfig();
+                            Table table = mySqlTableDriver.getTable(connection, tableName);
+                            ServiceGenerator generator = new ServiceGenerator(config.getPackageName(),
+                                    generatorConfig.getBaseServiceConfig().getPackageName(),table,tpackage,generatorConfig.getDaoConfig().getPackageName());
+                            generator.setPrefix(generatorConfig.getTableConfig().getPrefix());
+                            String code = generator.generateCode();
+                            write(basePath,config.getPackageName(),code,generator.getFileName());
                         }
 
                     }

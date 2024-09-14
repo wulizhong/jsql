@@ -18,12 +18,23 @@ public class GeneratorConfig {
 
     private DaoConfig daoConfig;
 
-    public GeneratorConfig(BaseDaoConfig baseDaoConfig, DTOConfig dtoConfig, EntityConfig entityConfig, TableConfig tableConfig, TConfig tConfig) {
+    private BaseServiceConfig baseServiceConfig;
+    private ServiceConfig serviceConfig;
+
+    public GeneratorConfig(BaseDaoConfig baseDaoConfig,
+                           DTOConfig dtoConfig,
+                           EntityConfig entityConfig,
+                           TableConfig tableConfig,
+                           TConfig tConfig,
+                           BaseServiceConfig baseServiceConfig,
+                           ServiceConfig serviceConfig) {
         this.baseDaoConfig = baseDaoConfig;
         this.dtoConfig = dtoConfig;
         this.entityConfig = entityConfig;
         this.tableConfig = tableConfig;
         this.tConfig = tConfig;
+        this.baseServiceConfig = baseServiceConfig;
+        this.serviceConfig = serviceConfig;
 
     }
 
@@ -76,10 +87,26 @@ public class GeneratorConfig {
         this.daoConfig = daoConfig;
     }
 
+    public BaseServiceConfig getBaseServiceConfig() {
+        return baseServiceConfig;
+    }
+
+    public void setBaseServiceConfig(BaseServiceConfig baseServiceConfig) {
+        this.baseServiceConfig = baseServiceConfig;
+    }
+
+    public ServiceConfig getServiceConfig() {
+        return serviceConfig;
+    }
+
+    public void setServiceConfig(ServiceConfig serviceConfig) {
+        this.serviceConfig = serviceConfig;
+    }
+
     public static class Builder{
 
         public GeneratorConfig build(){
-            GeneratorConfig config = new GeneratorConfig(baseDaoConfig,dtoConfig,entityConfig,tableConfig,tConfig);
+            GeneratorConfig config = new GeneratorConfig(baseDaoConfig,dtoConfig,entityConfig,tableConfig,tConfig,baseServiceConfig,serviceConfig);
             config.setDaoConfig(daoConfig);
             return config;
         }
@@ -95,6 +122,9 @@ public class GeneratorConfig {
 
         private TConfig tConfig;
         private DaoConfig daoConfig;
+
+        private BaseServiceConfig baseServiceConfig;
+        private ServiceConfig serviceConfig;
 
         public Builder setBaseDaoConfig(BaseDaoConfig baseDaoConfig) {
             this.baseDaoConfig = baseDaoConfig;
@@ -120,7 +150,16 @@ public class GeneratorConfig {
             this.daoConfig = daoConfig;
             return this;
         }
-//        public Builder setTConfig(TConfig tConfig) {
+
+        public void setBaseServiceConfig(BaseServiceConfig baseServiceConfig) {
+            this.baseServiceConfig = baseServiceConfig;
+        }
+
+        public void setServiceConfig(ServiceConfig serviceConfig) {
+            this.serviceConfig = serviceConfig;
+        }
+
+        //        public Builder setTConfig(TConfig tConfig) {
 //            this.tConfig = tConfig;
 //            return this;
 //        }

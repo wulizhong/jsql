@@ -6,7 +6,7 @@
 
 	<groupId>com.wlz</groupId>
 	<artifactId>jsql</artifactId>
-	<version>1.jdk8.1-SNAPSHOT</version>
+	<version>1.0-jdk8-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>jsql</name>
