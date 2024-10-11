@@ -6,7 +6,7 @@ public class InsertResult {
 
 	int rowCount = 0;
 	
-	Object id;
+	Number id;
 	
 	
 
@@ -18,7 +18,7 @@ public class InsertResult {
 		this.rowCount = rowCount;
 	}
 
-	public InsertResult(int rowCount, Object id) {
+	public InsertResult(int rowCount, Number id) {
 		super();
 		this.rowCount = rowCount;
 		this.id = id;
@@ -32,11 +32,11 @@ public class InsertResult {
 		this.rowCount = rowCount;
 	}
 
-	public Object getId() {
+	public Number getId() {
 		return id;
 	}
 
-	public void setId(Object id) {
+	public void setId(Number id) {
 		this.id = id;
 	}
 	

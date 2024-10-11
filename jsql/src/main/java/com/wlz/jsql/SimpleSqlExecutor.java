@@ -179,15 +179,18 @@ public class SimpleSqlExecutor extends SqlExecutor {
 				ResultSetMetaData rsmd = resultSet.getMetaData();
 				if (resultSet.next()) {
 					int columnType = rsmd.getColumnType(1);
-					Object id = null;
+					Number id = null;
 					switch (columnType) {
 					case Types.BIGINT:
 						id = resultSet.getLong(1);
 						break;
 					case Types.INTEGER:
 						id = resultSet.getInt(1);
+						break;
+					case Types.TINYINT:
+							id = resultSet.getInt(1);
 					case Types.VARCHAR:
-						id = resultSet.getString(1);
+						id = Long.parseLong(resultSet.getString(1));
 						break;
 
 					default:

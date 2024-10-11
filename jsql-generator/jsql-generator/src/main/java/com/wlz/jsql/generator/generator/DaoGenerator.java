@@ -63,6 +63,8 @@ public class DaoGenerator extends Generator{
 		String clazzName = FieldNameUtils.underlineToHump(tableName, true);
 		clazzName = FieldNameUtils.toUpperCaseFirstOne(clazzName);
 		sb.append("import org.springframework.stereotype.Repository;\r\n");
+		sb.append("import org.springframework.beans.factory.annotation.Autowired;\r\n");
+		sb.append("import com.wlz.jsql.SqlExecutor;\r\n");
 		sb.append("import "+baseDaoPackageName+"."+clazzName+"BaseDao;\r\n");
 		sb.append("import static "+tpackage+".T.*;\r\n");
 		sb.append("import static com.wlz.jsql.DSL.*;\r\n");
@@ -72,6 +74,8 @@ public class DaoGenerator extends Generator{
 		fileName = clazzName+dao+".java";
 		sb.append("@Repository\r\n");
 		sb.append("public class "+clazzName+dao +" extends "+clazzName+"BaseDao{\r\n");
+		sb.append("\t@Autowired\r\n");
+		sb.append("\tSqlExecutor sqlExecutor;\r\n");
 		sb.append("\t\t\r\n");
 		sb.append("}\r\n");
 		

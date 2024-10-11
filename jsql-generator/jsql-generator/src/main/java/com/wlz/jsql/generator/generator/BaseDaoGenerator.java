@@ -1,5 +1,7 @@
 package com.wlz.jsql.generator.generator;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -131,7 +133,7 @@ public class BaseDaoGenerator extends Generator{
 			
 			sb.append("\t\tif(param.get"+methodName+"()!=null){\r\n");
 			
-			sb.append("\t\t\t columns.add("+convertStringCase(tableName)+"."+convertStringCase(FieldNameUtils.humpToUnderline(columnName))+");\r\n");
+			sb.append("\t\t\t columns.add("+convertStringCase(tableName)+"."+convertStringCase(c.getName())+");\r\n");
 			sb.append("\t\t\t values.add(param.get"+methodName+"());\r\n");
 			
 			sb.append("\t\t}\r\n");
@@ -148,7 +150,25 @@ public class BaseDaoGenerator extends Generator{
 			if(c.isAutoIncrement()) {
 				String columnName = FieldNameUtils.underlineToHump(c.getName(), true);
 				String methodName = FieldNameUtils.toUpperCaseFirstOne(columnName);
-				sb.append("\t\t\tparam.set"+methodName+"(("+TypeUtils.getClassName(c.getType()).getSimpleName()+")ir.getId());\r\n");
+
+				Class<?> idType = TypeUtils.getClassName(c.getType());
+
+				if(idType == BigDecimal.class||idType == BigInteger.class){
+					sb.append("\t\t\tparam.set"+methodName+"(new BigBigDecimal(ir.getId().longValue()));\r\n");
+				}else{
+
+					String convertType = "";
+					if(idType == Long.class){
+						convertType = ".longValue()";
+					}else if(idType == Integer.class){
+						convertType = ".intValue()";
+					}else if(idType == Short.class){
+						convertType = ".shortValue()";
+					}
+					sb.append("\t\t\tparam.set"+methodName+"(ir.getId()"+convertType+");\r\n");
+
+				}
+
 				break;
 			}
 		}
@@ -181,7 +201,7 @@ public class BaseDaoGenerator extends Generator{
 			
 			String getMethod = "param.get"+methodName+"()";
 
-			String columnField = convertStringCase(tableName)+"."+convertStringCase(FieldNameUtils.humpToUnderline(columnName));
+			String columnField = convertStringCase(tableName)+"."+convertStringCase(c.getName());
 			sb.append("\t\tif("+getMethod+"!=null&&!("+columnField+" instanceof Id)){\r\n");
 			
 			sb.append("\t\t\t columns.add("+columnField+");\r\n");
@@ -211,7 +231,7 @@ public class BaseDaoGenerator extends Generator{
 			}else {
 				sb.append("\t\t      .and(");
 			}
-			sb.append(convertStringCase(tableName)+"."+convertStringCase(FieldNameUtils.humpToUnderline(columnName))+".eq("+getMethod+"))");
+			sb.append(convertStringCase(tableName)+"."+convertStringCase(c.getName())+".eq("+getMethod+"))");
 
 			if(c == ids.get(ids.size()-1)) {
 				sb.append(";\r\n");
@@ -291,9 +311,9 @@ public class BaseDaoGenerator extends Generator{
 			sb.append("\t\tif("+getMethod+"!=null){\r\n");
 
 			sb.append("\t\t\tif(conditionBuilder == null){\r\n");
-			sb.append("\t\t\t\tconditionBuilder = fromBuilder.where("+convertStringCase(tableName)+"."+convertStringCase(FieldNameUtils.humpToUnderline(columnName))+".eq("+getMethod+"));\r\n");
+			sb.append("\t\t\t\tconditionBuilder = fromBuilder.where("+convertStringCase(tableName)+"."+convertStringCase(c.getName())+".eq("+getMethod+"));\r\n");
 			sb.append("\t\t\t}else {\r\n");
-			sb.append("\t\t\t\tconditionBuilder = conditionBuilder.and("+convertStringCase(tableName)+"."+convertStringCase(FieldNameUtils.humpToUnderline(columnName))+".eq("+getMethod+"));\r\n");
+			sb.append("\t\t\t\tconditionBuilder = conditionBuilder.and("+convertStringCase(tableName)+"."+convertStringCase(c.getName())+".eq("+getMethod+"));\r\n");
 			sb.append("\t\t\t}\r\n");
 			sb.append("\t\t}\r\n");
 			
@@ -359,7 +379,7 @@ public class BaseDaoGenerator extends Generator{
 			}else {
 				sb.append("\t\t      .and(");
 			}
-			sb.append(convertStringCase(tableName)+"."+convertStringCase(FieldNameUtils.humpToUnderline(columnName))+".eq("+columnName+"))");
+			sb.append(convertStringCase(tableName)+"."+convertStringCase(c.getName())+".eq("+columnName+"))");
 
 			if(c == ids.get(ids.size()-1)) {
 				sb.append(";\r\n");

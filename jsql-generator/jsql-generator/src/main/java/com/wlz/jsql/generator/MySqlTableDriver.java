@@ -1,9 +1,6 @@
 package com.wlz.jsql.generator;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.sql.Types;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,12 +25,21 @@ public class MySqlTableDriver extends TableDriver {
 
 	
 	private List<Column> getColumn(Connection connection, String tableName){
+		String databaseName = null;
+		try {
+			databaseName = connection.getCatalog();
+//			connection.getSchema();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
 		List<Column> columns = new ArrayList<>();
 		String sql = "select * "
 				+ "from\r\n"
 				+ "	information_schema.columns\r\n"
 				+ "where\r\n"
-				+ "	table_name = '"+tableName+"'";
+				+ "	table_name = '"+tableName+"'"
+				+ " and table_schema ='"+databaseName+"'";
 		try {
 			Statement statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery(sql);
