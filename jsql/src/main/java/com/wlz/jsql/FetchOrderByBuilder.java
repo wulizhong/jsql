@@ -29,16 +29,16 @@ public class FetchOrderByBuilder<T> extends OrderByBuilder implements Fetch<T>{
 
     @Override
     public T fetch() {
-        return sqlExecutor.selectOne(this,clazz);
+        return sqlExecutor.selectOne(orderByBuilder,clazz);
     }
 
     @Override
     public List<T> fetchList() {
-        return sqlExecutor.selectList(this,clazz);
+        return sqlExecutor.selectList(orderByBuilder,clazz);
     }
 
     @Override
     public Record fetchPage(int pageNo, int size) {
-        return sqlExecutor.selectPage(this,pageNo,size);
+        return sqlExecutor.selectPage(orderByBuilder,pageNo,size);
     }
 }

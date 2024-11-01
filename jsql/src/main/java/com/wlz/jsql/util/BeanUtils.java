@@ -203,24 +203,27 @@ public class BeanUtils {
 				Method setMethod = ReflectionUtils.findSetMethod(clazz,
 						"set" + FieldNameUtils.toUpperCaseFirstOne(f.getName()));
 				if (setMethod != null) {
-					Class<?> paramterType = setMethod.getParameterTypes()[0];
+					Class<?> parameterType = setMethod.getParameterTypes()[0];
 					Object value = ReflectionUtils.getValueByGetMethod(src, f);
-					if (value.getClass() != paramterType) {
-						if (paramterType == Long.class || paramterType == long.class) {
+					if(value == null){
+						continue;
+					}
+					if (value.getClass() != parameterType) {
+						if (parameterType == Long.class || parameterType == long.class) {
 							setMethod.invoke(obj, Long.parseLong(value.toString()));
-						} else if (paramterType == Integer.class || paramterType == int.class) {
+						} else if (parameterType == Integer.class || parameterType == int.class) {
 							setMethod.invoke(obj, Integer.parseInt(value.toString()));
-						} else if (paramterType == Short.class || paramterType == short.class) {
+						} else if (parameterType == Short.class || parameterType == short.class) {
 							setMethod.invoke(obj, Short.parseShort(value.toString()));
-						} else if (paramterType == Byte.class || paramterType == byte.class) {
+						} else if (parameterType == Byte.class || parameterType == byte.class) {
 							setMethod.invoke(obj, Byte.parseByte(value.toString()));
-						} else if (paramterType == Double.class || paramterType == double.class) {
+						} else if (parameterType == Double.class || parameterType == double.class) {
 							setMethod.invoke(obj, Double.parseDouble(value.toString()));
-						} else if (paramterType == Float.class || paramterType == float.class) {
+						} else if (parameterType == Float.class || parameterType == float.class) {
 							setMethod.invoke(obj, Float.parseFloat(value.toString()));
-						} else if (paramterType == BigDecimal.class) {
+						} else if (parameterType == BigDecimal.class) {
 							setMethod.invoke(obj, new BigDecimal(value.toString()));
-						} else if (paramterType == BigInteger.class) {
+						} else if (parameterType == BigInteger.class) {
 							setMethod.invoke(obj, new BigInteger(value.toString()));
 						} else {
 							setMethod.invoke(obj, value);

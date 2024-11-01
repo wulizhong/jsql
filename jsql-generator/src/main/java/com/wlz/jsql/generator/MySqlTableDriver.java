@@ -62,7 +62,7 @@ public class MySqlTableDriver extends TableDriver {
 					c.setType(Types.FLOAT);
 				}else if(type.equalsIgnoreCase("tinyint")) {
 					c.setType(Types.TINYINT);
-				}else if(type.equalsIgnoreCase("text")) {
+				}else if(type.equalsIgnoreCase("text")||type.equalsIgnoreCase("mediumtext")||type.equalsIgnoreCase("longtext")) {
 					c.setType(Types.VARCHAR);
 				}else if(type.equalsIgnoreCase("timestamp")) {
 					c.setType(Types.TIMESTAMP);
