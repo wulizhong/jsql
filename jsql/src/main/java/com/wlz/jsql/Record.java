@@ -24,7 +24,7 @@ public class Record {
 		
 		Object value = record.get(clazz);
 		if(value == null) {
-			return null;
+			return new ArrayList<>();
 		}
 		return (List<T>) value;
 	}

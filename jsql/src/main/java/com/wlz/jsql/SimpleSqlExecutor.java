@@ -85,7 +85,8 @@ public class SimpleSqlExecutor extends SqlExecutor {
 				if (paramters == null) {
 					paramters = new ArrayList<>();
 				}
-				paramters.add(pageNumber, pageSize);
+				paramters.add(pageNumber*pageSize);
+				paramters.add(pageSize);
 				resultSet = null;
 				if (CollectionUtils.isEmpty(paramters)) {
 					Statement statement = connection.createStatement();

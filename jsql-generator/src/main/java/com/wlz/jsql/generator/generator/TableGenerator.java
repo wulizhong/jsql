@@ -84,9 +84,9 @@ public class TableGenerator extends Generator{
 		sb.append("\t}\r\n");
 		
 		
-		sb.append("\tpublic static final Column "+convertStringCase("ALL")+" = new Column(\""+convertTableAlias(convertStringCase(tableName))+"\",\"*\");\r\n");
+		sb.append("\tpublic final Column "+convertStringCase("ALL")+" = new Column(\""+convertTableAlias(convertStringCase(tableName))+"\",\"*\");\r\n");
 		
-		sb.append("\tpublic static final Column "+convertStringCase("ALL")+"(String tableAlias) {\r\n");
+		sb.append("\tpublic final Column "+convertStringCase("ALL")+"(String tableAlias) {\r\n");
 		sb.append("\t\treturn new Column(tableAlias,\"*\");\r\n");
 		sb.append("\t}\r\n");
 		
@@ -101,8 +101,8 @@ public class TableGenerator extends Generator{
 //			String fieldName = FieldNameUtils.underlineToHump(c.getName(), true);
 			if(c.isPrimaryKey()) {
 				
-				sb.append("\tpublic static final Id "+convertStringCase(columnName.toUpperCase())+" = new Id(\""+convertTableAlias(convertStringCase(tableName))+"\",\""+convertStringCase(columnName)+"\","+c.getType()+");\r\n");
-				sb.append("\tpublic static final Id "+convertStringCase(columnName.toUpperCase())+" (String tableAlias) {\r\n");
+				sb.append("\tpublic final Id "+convertStringCase(columnName.toUpperCase())+" = new Id(\""+convertTableAlias(convertStringCase(tableName))+"\",\""+convertStringCase(columnName)+"\","+c.getType()+");\r\n");
+				sb.append("\tpublic final Id "+convertStringCase(columnName.toUpperCase())+" (String tableAlias) {\r\n");
 				sb.append("\t\treturn new Id(tableAlias,\""+columnName+"\","+c.getType()+");\r\n");
 				sb.append("\t}\r\n");
 				

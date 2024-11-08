@@ -138,7 +138,7 @@ public class JdbcTemplateSqlExecutor extends SqlExecutor {
 			if (paramters == null) {
 				paramters = new ArrayList<>();
 			}
-			paramters.add(pageNumber);
+			paramters.add(pageNumber*pageSize);
 			paramters.add(pageSize);
 			if (jsqlProperty.isSqlPrint()||jsqlProperty.isRawSqlPrint()||jsqlProperty.isParamPrint()) {
 				StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
@@ -163,6 +163,7 @@ public class JdbcTemplateSqlExecutor extends SqlExecutor {
 			}
 		} else {
 			record = new Record();
+
 		}
 		record.setTotal(total);
 		

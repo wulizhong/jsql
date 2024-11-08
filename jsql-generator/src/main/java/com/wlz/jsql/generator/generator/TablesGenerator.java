@@ -61,7 +61,7 @@ public class TablesGenerator extends Generator{
 			sb.append("\tpublic static final "+clazzName+tableSuffix+" "+convertStringCase(tableName)+" = "+clazzName+tableSuffix+"."+convertStringCase(tableName)+";\r\n");
 			
 			
-			sb.append("\tpublic static final "+clazzName+tableSuffix+" "+convertStringCase(tableName)+"(String tableAlias) {\r\n");
+			sb.append("\tpublic static "+clazzName+tableSuffix+" "+convertStringCase(tableName)+"(String tableAlias) {\r\n");
 			
 			sb.append("\t\treturn new "+clazzName+tableSuffix+"(\""+convertStringCase(table)+"\",tableAlias);\r\n");
 			
