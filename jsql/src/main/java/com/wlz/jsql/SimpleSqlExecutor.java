@@ -147,15 +147,14 @@ public class SimpleSqlExecutor extends SqlExecutor {
 	public InsertResult insert(Sql sql) {
 		// TODO Auto-generated method stub
 		String sqlStr = sql.toSql(getSqlContext());
-		System.out.println(sqlStr);
 		List<Table> tables = sql.tables();
-		List<Object> paramters = sql.paramters();
+		List<Object> parameters = sql.paramters();
 		InsertResult insertResult = new InsertResult();
 		try {
 			Table table = tables.get(0);
 			int rowCount = 0;
 			ResultSet resultSet = null;
-			if (CollectionUtils.isEmpty(paramters)) {
+			if (CollectionUtils.isEmpty(parameters)) {
 				Statement statement = connection.createStatement();
 				if (table.isGenerateKey()) {
 					rowCount = statement.executeUpdate(sqlStr, Statement.RETURN_GENERATED_KEYS);
@@ -170,7 +169,7 @@ public class SimpleSqlExecutor extends SqlExecutor {
 				} else {
 					preparedStatement = connection.prepareStatement(sqlStr);
 				}
-				setValue(preparedStatement, paramters);
+				setValue(preparedStatement, parameters);
 				rowCount = preparedStatement.executeUpdate();
 				if (table.isGenerateKey()) {
 					resultSet = preparedStatement.getGeneratedKeys();

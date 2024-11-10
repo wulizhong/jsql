@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -100,13 +102,13 @@ public class JdbcTemplateSqlExecutor extends SqlExecutor {
 		// TODO Auto-generated method stub
 		String pageSql = sql.toSql(getSqlContext());
 
-		List<Object> paramters = sql.paramters();
+		List<Object> parameters = sql.paramters();
 
 		String sqlStr =  pageSql.substring(0, pageSql.indexOf("select") + 6) + " count(*) "
 				+ pageSql.substring(pageSql.indexOf("from"));
 		if (jsqlProperty.isSqlPrint()||jsqlProperty.isRawSqlPrint()||jsqlProperty.isParamPrint()) {
 			StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
-			logSql(stackTrace, sqlStr, paramters);
+			logSql(stackTrace, sqlStr, parameters);
 		}
 
 		ResultSetExtractor<Integer> resultSetExtractor = new ResultSetExtractor<Integer>() {
@@ -121,10 +123,10 @@ public class JdbcTemplateSqlExecutor extends SqlExecutor {
 			}
 		};
 		long total = 0;
-		if (CollectionUtils.isEmpty(paramters)) {
+		if (CollectionUtils.isEmpty(parameters)) {
 			total = jdbcTemplate.query(sqlStr, resultSetExtractor);
 		}else {
-			total = jdbcTemplate.query(sqlStr, resultSetExtractor, paramters.toArray());
+			total = jdbcTemplate.query(sqlStr, resultSetExtractor, parameters.toArray());
 		}
 		if (jsqlProperty.isResultCountPrint()) {
 			StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
@@ -135,14 +137,14 @@ public class JdbcTemplateSqlExecutor extends SqlExecutor {
 		if (total > 0) {
 			pageSql = pageSql + " limit ? , ? ";
 			List<Table> tables = sql.tables();
-			if (paramters == null) {
-				paramters = new ArrayList<>();
+			if (parameters == null) {
+				parameters = new ArrayList<>();
 			}
-			paramters.add(pageNumber*pageSize);
-			paramters.add(pageSize);
+			parameters.add(pageNumber*pageSize);
+			parameters.add(pageSize);
 			if (jsqlProperty.isSqlPrint()||jsqlProperty.isRawSqlPrint()||jsqlProperty.isParamPrint()) {
 				StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
-				logSql(stackTrace, pageSql, paramters);
+				logSql(stackTrace, pageSql, parameters);
 			}
 			ResultSetExtractor<Record> recordResultSetExtractor = new ResultSetExtractor<Record>() {
 				@Override
@@ -152,10 +154,10 @@ public class JdbcTemplateSqlExecutor extends SqlExecutor {
 					return record;
 				}
 			};
-			if (CollectionUtils.isEmpty(paramters)) {
+			if (CollectionUtils.isEmpty(parameters)) {
 				record = jdbcTemplate.query(pageSql, recordResultSetExtractor);
 			} else {
-				record = jdbcTemplate.query(pageSql, recordResultSetExtractor, paramters.toArray());
+				record = jdbcTemplate.query(pageSql, recordResultSetExtractor, parameters.toArray());
 			}
 			if (jsqlProperty.isResultCountPrint()) {
 				StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
@@ -275,6 +277,8 @@ public class JdbcTemplateSqlExecutor extends SqlExecutor {
 				String v = null;
 				if (obj instanceof Number) {
 					v = obj.toString();
+				}if (obj instanceof Date) {
+					v = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(obj);
 				} else {
 					v = "'" + obj.toString() + "'";
 				}
