@@ -111,7 +111,7 @@ public class FetchConditionBuilder<T> extends ConditionBuilder implements Fetch<
 
     @Override
     public FetchOrderByBuilder<T> orderBy(Order... orders) {
-        OrderByBuilder orderByBuilder = conditionBuilder.orderBy(orders);
+        OrderByBuilder orderByBuilder = conditionBuilder == null?fromBuilder.orderBy(orders) : conditionBuilder.orderBy(orders);
         FetchOrderByBuilder<T> fetchOrderByBuilder = new FetchOrderByBuilder<>(sqlExecutor,clazz,orderByBuilder);
         return fetchOrderByBuilder;
     }
