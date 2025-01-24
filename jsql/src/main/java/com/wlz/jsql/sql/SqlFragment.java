@@ -13,7 +13,7 @@ public abstract class SqlFragment implements Sql{
 	
 //	private SqlFragment nextSqlFragment;
 
-	protected SqlFragment pre() {
+	public SqlFragment pre() {
 		return preSqlFragment;
 	}
 

@@ -19,12 +19,16 @@ public class FetchOrderByBuilder<T> extends OrderByBuilder implements Fetch<T>{
 
     @Override
     public FetchLimit<T> limit(int offset, int rows) {
-        return new FetchLimit<T>(offset, rows,sqlExecutor,clazz);
+        FetchLimit<T> limit = new FetchLimit<T>(offset, rows,sqlExecutor,clazz);
+        limit.setPreSqlFragment(orderByBuilder.pre());
+        return limit;
     }
 
     @Override
     public FetchLimit<T> limit(int offset) {
-        return new FetchLimit<T>(offset,sqlExecutor,clazz);
+        FetchLimit<T> limit = new FetchLimit<T>(offset,sqlExecutor,clazz);
+        limit.setPreSqlFragment(orderByBuilder.pre());
+        return limit;
     }
 
     @Override

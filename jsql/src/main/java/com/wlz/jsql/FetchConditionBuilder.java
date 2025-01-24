@@ -118,12 +118,16 @@ public class FetchConditionBuilder<T> extends ConditionBuilder implements Fetch<
 
     @Override
     public FetchLimit<T> limit(int offset, int rows) {
-        return new FetchLimit<T>(offset, rows,sqlExecutor,clazz);
+        FetchLimit<T> limit = new FetchLimit<T>(offset, rows,sqlExecutor,clazz);
+        limit.setPreSqlFragment(conditionBuilder==null?fromBuilder.pre():conditionBuilder.pre());
+        return limit;
     }
 
     @Override
     public FetchLimit<T> limit(int offset) {
-        return new FetchLimit<T>(offset,sqlExecutor,clazz);
+        FetchLimit<T> limit = new FetchLimit<T>(offset,sqlExecutor,clazz);
+        limit.setPreSqlFragment(conditionBuilder==null?fromBuilder.pre():conditionBuilder.pre());
+        return limit;
     }
 
     @Override
