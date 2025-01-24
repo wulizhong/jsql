@@ -5,11 +5,11 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.0</version>
+		<version>2.7.15</version>
 	</parent>
 	<groupId>com.wlz.jsql</groupId>
 	<artifactId>jsql-spring-boot-starter</artifactId>
-	<version>1.10-SNAPSHOT</version>
+	<version>1.0-jdk8-SNAPSHOT</version>
 	<name>jsql-spring-boot-starter</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -27,7 +27,7 @@
     <dependency>
       <groupId>com.wlz</groupId>
       <artifactId>jsql</artifactId>
-		<version>1.10-SNAPSHOT</version>
+		<version>1.0-jdk8-SNAPSHOT</version>
     </dependency>
 	</dependencies>
 
